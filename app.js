@@ -18,14 +18,22 @@ function updateWhatsAppPhone(item) {
     if (isWhatsApp >= 0) {
       const whatsAppNode = contact.childNodes[1];
       let number = whatsAppNode.nodeValue;
+      const formattedNumber = number.replace(': ', '');
+
       number = number.replace(/\D/g, "");
 
+      const span = document.createElement("span");
+      span.innerText = ": ";
+      span.style.setProperty("display", "inline", "important");
+
       const a = document.createElement("a");
-      a.innerText = whatsAppNode.nodeValue;
+      a.innerText = formattedNumber;
       a.title = "Fale por WhatsApp";
       a.href = "https://wa.me/55" + number;
       a.target = "_blank";
-      contact.appendChild(a);
+
+      span.appendChild(a);
+      contact.appendChild(span);
       whatsAppNode.remove();
     }
   });
